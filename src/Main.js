@@ -1,33 +1,17 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Slider,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
+import { Slider, TextField, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import Forms from "./Forms";
 
 const useStyles = makeStyles({
+  slider: {
+    width: "80% !important",
+  },
   card: {
     width: "50%",
     margin: "1rem auto",
     padding: 25,
     boxShadow: "-9px 8px 1px 1px #52de97 !important",
-    border: "1px solid lightslategrey",
-  },
-  cardContent: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardActions: {
-    display: "flex",
-    flexDirection: "column",
-    borderRadius: 3,
-  },
-  slider: {
-    width: "80% !important",
   },
 });
 
@@ -46,41 +30,21 @@ const Main = () => {
   ]);
 
   return (
-    <Card className={classes.card}>
-      <CardContent className={classes.cardContent}>
-        <TextField
-          type="number"
-          label="Cost of Failures"
-          variant="outlined"
-          defaultValue={0}
-          margin="normal"
-        />
-        <TextField
-          type="number"
-          label="Cost of units"
-          variant="outlined"
-          defaultValue={0}
-          margin="normal"
-        />
-        <TextField
-          type="number"
-          label="Volume"
-          variant="outlined"
-          defaultValue={0}
-          margin="normal"
-        />
-        <TextField
-          type="number"
-          label="Failure Rate"
-          variant="outlined"
-          defaultValue={0}
-          margin="normal"
-        />
+    <div>
+      <Forms />
 
-        <Typography>Desired Amount To Save: {moneyToSave}</Typography>
-      </CardContent>
+      <div className={classes.card}>
+        <Typography>Desired Amount To Save</Typography>
 
-      <CardActions className={classes.cardActions}>
+        <TextField
+          type="number"
+          variant="filled"
+          defaultValue={0}
+          margin="normal"
+        />
+      </div>
+
+      <div className={classes.card}>
         <Slider
           aria-label="Custom marks"
           defaultValue={50}
@@ -99,8 +63,8 @@ const Main = () => {
           disabled
           className={classes.slider}
         />
-      </CardActions>
-    </Card>
+      </div>
+    </div>
   );
 };
 
