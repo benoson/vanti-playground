@@ -6,13 +6,18 @@ import { Button } from "@mui/material";
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     padding: 30,
   },
   stationsSection: {
     display: "flex",
+    alignItems: "center",
     flexWrap: "wrap",
     marginRight: 30,
+  },
+  button: {
+    marginLeft: "50px !important",
   },
 });
 
@@ -43,17 +48,22 @@ const PlaygroundContainer = () => {
       <div className={classes.stationsSection}>
         {allStations.map((station) => (
           <Station
+            key={station.id}
+            id={station.id}
             name={station.name}
             pricePerProduct={station.pricePerProduct}
             volumePerMinute={station.volumePerMinute}
             shouldDisplayProdLine={station.id !== 0}
           />
         ))}
+        <Button
+          variant="outlined"
+          className={classes.button}
+          onClick={onStationClick}
+        >
+          +
+        </Button>
       </div>
-
-      <Button variant="outlined" onClick={onStationClick}>
-        +
-      </Button>
     </div>
   );
 };

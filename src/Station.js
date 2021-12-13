@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import ProductionLine from "./ProductionLine";
+import Popover from "@mui/material/Popover";
+import { Button, Slider, TextField } from "@mui/material";
 
 const useStyles = makeStyles({
   root: {
@@ -23,8 +25,7 @@ const useStyles = makeStyles({
   dashedLine: {
     border: "1px dashed lightslategrey",
     borderRadius: 5,
-    marginBottom: "5px",
-    marginLeft: "auto",
+    margin: "auto auto 5px auto",
     padding: 5,
     width: "fit-content",
   },
@@ -32,15 +33,47 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  popupContent: {
+    padding: 25,
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: 10,
+  },
+  button: {
+    marginTop: "15px !important",
+  },
 });
 
 const Station = ({
+  id,
   name,
   pricePerProduct,
   volumePerMinute,
   shouldDisplayProdLine,
 }) => {
   const classes = useStyles();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [marks, setMarks] = useState([
+    {
+      value: 0,
+      label: "0°C",
+    },
+    {
+      value: 100,
+      label: "100°C",
+    },
+  ]);
+
+  const onStationClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setIsPopupOpen(true);
+  };
+
+  const onFormFinishClick = (event) => {
+    setIsPopupOpen(false);
+    event.stopPropagation();
+  };
 
   return (
     <div className={classes.root}>
@@ -48,7 +81,69 @@ const Station = ({
 
       <div className={classes.mainSection}>
         {shouldDisplayProdLine && <ProductionLine />}
-        <div className={classes.main}></div>
+        <div className={classes.main} onClick={onStationClick}>
+          <Popover
+            id={id}
+            open={isPopupOpen}
+            anchorEl={anchorEl}
+            onClose={() => {}}
+            anchorOrigin={{
+              vertical: "center",
+              horizontal: "center",
+            }}
+          >
+            <div className={classes.popupContent}>
+              <TextField
+                type="number"
+                label="Cost of Failures"
+                variant="outlined"
+                defaultValue={pricePerProduct}
+              />
+              <TextField
+                type="number"
+                label="Cost of units"
+                variant="outlined"
+                defaultValue={volumePerMinute}
+                margin="normal"
+              />
+              <TextField
+                type="number"
+                label="Volume"
+                variant="outlined"
+                defaultValue={volumePerMinute}
+                margin="normal"
+              />
+              <TextField
+                type="number"
+                label="Failure Rate"
+                variant="outlined"
+                defaultValue={volumePerMinute}
+                margin="normal"
+              />
+              <Slider
+                aria-label="Custom marks"
+                defaultValue={50}
+                step={10}
+                valueLabelDisplay="auto"
+                marks={marks}
+              />
+              <Slider
+                aria-label="Custom marks"
+                defaultValue={50}
+                step={10}
+                valueLabelDisplay="auto"
+                marks={marks}
+              />
+              <Button
+                variant="outlined"
+                className={classes.button}
+                onClick={onFormFinishClick}
+              >
+                OK
+              </Button>
+            </div>
+          </Popover>
+        </div>
       </div>
     </div>
   );
