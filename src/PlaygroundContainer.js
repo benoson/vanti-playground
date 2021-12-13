@@ -27,7 +27,7 @@ const PlaygroundContainer = () => {
   const [allStations, setNewStation] = useState([
     {
       id: 0,
-      name: "My First Station",
+      name: "Station #1",
       pricePerProduct: 0.4,
       volumePerMinute: 10,
     },
