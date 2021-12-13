@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Station from "./Station";
 import { Button } from "@mui/material";
-import ProductionLine from "./ProductionLine";
 
 const useStyles = makeStyles({
   root: {
@@ -12,12 +11,8 @@ const useStyles = makeStyles({
   },
   stationsSection: {
     display: "flex",
-    justifyContent: "space-between",
+    flexWrap: "wrap",
     marginRight: 30,
-  },
-  stationProductionLine: {
-    display: "flex",
-    alignItems: "center",
   },
 });
 
@@ -25,7 +20,12 @@ const PlaygroundContainer = () => {
   const classes = useStyles();
 
   const [allStations, setNewStation] = useState([
-    { name: "My First Station", pricePerProduct: 0.4, volumePerMinute: 10 },
+    {
+      id: 0,
+      name: "My First Station",
+      pricePerProduct: 0.4,
+      volumePerMinute: 10,
+    },
   ]);
 
   const onStationClick = () => {
@@ -42,14 +42,12 @@ const PlaygroundContainer = () => {
     <div className={classes.root}>
       <div className={classes.stationsSection}>
         {allStations.map((station) => (
-          <div className={classes.stationProductionLine}>
-            <Station
-              name={station.name}
-              pricePerProduct={station.pricePerProduct}
-              volumePerMinute={station.volumePerMinute}
-            />
-            <ProductionLine />
-          </div>
+          <Station
+            name={station.name}
+            pricePerProduct={station.pricePerProduct}
+            volumePerMinute={station.volumePerMinute}
+            shouldDisplayProdLine={station.id !== 0}
+          />
         ))}
       </div>
 

@@ -3,8 +3,8 @@ import React from "react";
 
 const useStyles = makeStyles({
   root: {
-    width: 100,
-    height: 10,
+    width: 150,
+    height: 35,
     borderTop: "1px dashed lightslategrey",
     borderBottom: "1px dashed lightslategrey",
   },
