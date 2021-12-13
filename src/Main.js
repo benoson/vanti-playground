@@ -3,6 +3,9 @@ import { Slider, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Forms from "./Forms";
 const useStyles = makeStyles({
+  main: {
+    position: "relative",
+  },
   slider: {
     width: "80% !important",
   },
@@ -28,6 +31,17 @@ const useStyles = makeStyles({
     fontSize: "20px !important",
     marginBottom: "35px !important",
     color: "purple !important",
+  },
+  flowNumber: {
+    color: "black",
+    fontSize: 24,
+    borderRadius: "50%",
+    backgroundColor: "#0effbc",
+    padding: "20px 30px",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    margin: 10,
   },
 });
 
@@ -132,8 +146,11 @@ const Main = () => {
   }, [data]);
 
   return (
-    <div>
+    <div className={classes.main}>
+      <div className={classes.flowNumber}>1</div>
+
       <h1 className={classes.title}> Vanti Saves Your Money.</h1>
+
       <Forms onDataChange={onDataChange} />
 
       <div className={classes.card}>

@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     flexWrap: "wrap",
     padding: 30,
+    position: "relative",
   },
   button: {
     marginLeft: "50px !important",
@@ -18,6 +19,17 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     marginBottom: 25,
+  },
+  flowNumber: {
+    color: "black",
+    fontSize: 24,
+    borderRadius: "50%",
+    backgroundColor: "#0effbc",
+    padding: "20px 30px",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    margin: 10,
   },
 });
 const PlaygroundContainer = () => {
@@ -56,6 +68,7 @@ const PlaygroundContainer = () => {
 
   return (
     <div className={classes.root}>
+      <div className={classes.flowNumber}>2</div>
       <div>
         <Typography></Typography>
       </div>
