@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import ProductionLine from "./ProductionLine";
 import Popover from "@mui/material/Popover";
 import { Button, Slider, TextField } from "@mui/material";
+import arrowImage from "./left-arrow.png";
 
 const useStyles = makeStyles({
   root: {
@@ -14,9 +15,9 @@ const useStyles = makeStyles({
     borderRadius: 10,
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
-    height: 100,
+    height: 150,
     padding: "0 30px",
-    width: 150,
+    width: 200,
     cursor: "pointer",
     "&:hover": {
       background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   dashedLine: {
     border: "1px dashed lightslategrey",
     borderRadius: 5,
-    margin: "auto auto 5px auto",
+    margin: "auto auto 5px 0",
     padding: 5,
     width: "fit-content",
   },
@@ -42,6 +43,22 @@ const useStyles = makeStyles({
   button: {
     marginTop: "15px !important",
   },
+  arrowImage: {
+    width: "70px",
+    transform: "scaleX(-1) scaleY(1)",
+    marginBottom: 25,
+  },
+  arrowImageFlipped: {
+    width: "70px",
+    transform: "scaleX(-1) scaleY(-1)",
+    marginTop: 25,
+  },
+  arrowsSection: {
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: 15,
+    marginRight: 15,
+  },
 });
 
 const Station = ({
@@ -50,6 +67,7 @@ const Station = ({
   pricePerProduct,
   volumePerMinute,
   shouldDisplayProdLine,
+  shouldDisplayArrows,
 }) => {
   const classes = useStyles();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -77,73 +95,25 @@ const Station = ({
 
   return (
     <div className={classes.root}>
-      <div className={classes.dashedLine}>{name}</div>
+      {/* <div className={classes.dashedLine}>{name}</div> */}
 
       <div className={classes.mainSection}>
-        {shouldDisplayProdLine && <ProductionLine />}
+        {/* {shouldDisplayProdLine && <ProductionLine />} */}
         <div className={classes.main} onClick={onStationClick}>
-          <Popover
-            id={id}
-            open={isPopupOpen}
-            anchorEl={anchorEl}
-            onClose={() => {}}
-            anchorOrigin={{
-              vertical: "center",
-              horizontal: "center",
-            }}
-          >
-            <div className={classes.popupContent}>
-              <TextField
-                type="number"
-                label="Cost of Failures"
-                variant="outlined"
-                defaultValue={pricePerProduct}
-              />
-              <TextField
-                type="number"
-                label="Cost of units"
-                variant="outlined"
-                defaultValue={volumePerMinute}
-                margin="normal"
-              />
-              <TextField
-                type="number"
-                label="Volume"
-                variant="outlined"
-                defaultValue={volumePerMinute}
-                margin="normal"
-              />
-              <TextField
-                type="number"
-                label="Failure Rate"
-                variant="outlined"
-                defaultValue={volumePerMinute}
-                margin="normal"
-              />
-              <Slider
-                aria-label="Custom marks"
-                defaultValue={50}
-                step={10}
-                valueLabelDisplay="auto"
-                marks={marks}
-              />
-              <Slider
-                aria-label="Custom marks"
-                defaultValue={50}
-                step={10}
-                valueLabelDisplay="auto"
-                marks={marks}
-              />
-              <Button
-                variant="outlined"
-                className={classes.button}
-                onClick={onFormFinishClick}
-              >
-                OK
-              </Button>
-            </div>
-          </Popover>
+          <TextField
+            type="number"
+            label="Number of Errors"
+            variant="outlined"
+            margin="normal"
+          />
         </div>
+
+        {shouldDisplayArrows && (
+          <div className={classes.arrowsSection}>
+            <img className={classes.arrowImage} src={arrowImage} />
+            <img className={classes.arrowImageFlipped} src={arrowImage} />
+          </div>
+        )}
       </div>
     </div>
   );
