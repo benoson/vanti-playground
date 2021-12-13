@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Station from "./Station";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import VantiSquare from "./VantiSquare";
 import NonVantiSquare from "./NonVantiSquare";
-
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -21,10 +20,9 @@ const useStyles = makeStyles({
     marginBottom: 25,
   },
 });
-
 const PlaygroundContainer = () => {
   const classes = useStyles();
-
+  const [sliderVal, setSliderVal] = useState(null);
   const [allStations, setNewStation] = useState([
     {
       id: 0,
@@ -52,55 +50,38 @@ const PlaygroundContainer = () => {
     },
   ]);
 
-  const onStationClick = () => {
-    const allStationsNew = [...allStations];
-    allStationsNew.push({
-      name: `Station #${allStations.length + 1}`,
-      pricePerProduct: 0,
-      volumePerMinute: 0,
-    });
-    setNewStation(allStationsNew);
+  const onStationValueChange = (val) => {
+    setSliderVal(val);
   };
 
   return (
     <div className={classes.root}>
       <div>
+        <Typography></Typography>
+      </div>
+
+      <div>
         <Station
           id={"#1"}
           name={"Station #1"}
-          // pricePerProduct={station.pricePerProduct}
-          // volumePerMinute={station.volumePerMinute}
-          // shouldDisplayProdLine={station.id !== 0}
           shouldDisplayArrows={true}
+          onStationValueChange={onStationValueChange}
+          sliderVal={sliderVal}
         />
       </div>
 
       {allStations.map((square, index) => (
-        // <Station
-        //   key={station.id}
-        //   id={station.id}
-        //   name={station.name}
-        //   pricePerProduct={station.pricePerProduct}
-        //   volumePerMinute={station.volumePerMinute}
-        //   shouldDisplayProdLine={station.id !== 0}
-        //   shouldDisplayArrows={station.id === 0}
-        // />
-
         <div key={index} className={classes.VantiNonVantiSection}>
-          <VantiSquare shouldDisplayArrow={index !== 0} index={index} />
+          <VantiSquare
+            shouldDisplayArrow={index !== 0}
+            index={index}
+            sliderVal={sliderVal}
+            onStationValueChange={onStationValueChange}
+          />
           <NonVantiSquare shouldDisplayArrow={index !== 0} index={index} />
         </div>
       ))}
-
-      {/* <Button
-          variant="outlined"
-          className={classes.button}
-          onClick={onStationClick}
-        >
-          +
-        </Button> */}
     </div>
   );
 };
-
 export default PlaygroundContainer;
