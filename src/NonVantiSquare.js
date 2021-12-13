@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   main: {
-    background: "linear-gradient(45deg, #CD5C5C 30%, #056434 90%)",
+    background: "linear-gradient(45deg, #CD5C5C 30%, #850808 90%)",
     border: 0,
     borderRadius: 10,
     color: "white",
