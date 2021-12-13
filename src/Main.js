@@ -151,21 +151,8 @@ const Main = () => {
       </div>
 
       <div className={classes.card}>
-        <Typography> Detection Rate </Typography>
-        <Slider
-          aria-label="Custom marks"
-          defaultValue={50}
-          step={10}
-          valueLabelDisplay="auto"
-          marks={marks}
-          disabled
-          value={detectionRate}
-          className={classes.firstSlider}
-        />
-        <Typography className={classes.detectionRateText}>
-          {detectionRate}
-        </Typography>
         <Typography> False Positive </Typography>
+
         <Slider
           aria-label="Custom marks"
           defaultValue={falsePositiveValue}
@@ -178,6 +165,25 @@ const Main = () => {
           marks={falsePositiveMarks}
           className={classes.slider}
         />
+      </div>
+
+      <div className={classes.card}>
+        <Typography> Detection Rate </Typography>
+
+        <Slider
+          aria-label="Custom marks"
+          defaultValue={50}
+          step={10}
+          valueLabelDisplay="auto"
+          marks={marks}
+          disabled
+          value={detectionRate}
+          className={classes.firstSlider}
+        />
+
+        <Typography className={classes.detectionRateText}>
+          {detectionRate}
+        </Typography>
       </div>
     </div>
   );
