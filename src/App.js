@@ -1,10 +1,10 @@
 import "./App.css";
-import Station from "./Station";
+import PlaygroundContainer from "./PlaygroundContainer";
 
 function App() {
   return (
     <div className="App">
-      <Station />
+      <PlaygroundContainer />
     </div>
   );
 }
